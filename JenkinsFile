@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    stages{
+        stage('Hello'){
+          steps{
+              echo 'Hello! This is Jenkins'
+            }
+        }
+        
+        stage('Checkout') {
+          steps{
+            echo 'checking out code'  
+            git 'https://github.com/Natwar12/springBootAppJenkins.git'
+            } 
+        }
+        
+        stage('Compiling'){
+            steps{
+                withMaven(maven: 'maven_3_3_1'){
+                    sh 'mvn compile'
+                }
+           }
+        }
+    }
+    }
